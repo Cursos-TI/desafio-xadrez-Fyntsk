@@ -1,40 +1,62 @@
 #include <stdio.h>
 
-int main() { // Torre move 5 casas para a direita
-    for (int t = 0; t < 5; t++){
-       printf("Torre moveu para Direita!\n"); // impressão do movimento
-    }
-     printf("\n");
-  
-    int r = 0;         // Rainha move 8 casas para esquerda
-    while (r < 8){
-        printf("Rainha moveu para Esquerda.\n");
-        r++;
-    }
+// Movimentar a Torre para a direita
+void moverTorre(int passos) {
+    if (passos == 0) return;
+    printf("Torre moveu para Direita!\n");
+    moverTorre(passos - 1);
+}
 
-    printf("\n");
- 
-    int b = 0;
-       // Bispo move 5 casas na diagonal para cima e a direita
-    do {
-        printf("Bispo moveu para cima, direita\n");
-        b++;
-    }   while (b < 5);
+//Movimentar a Rainha para a esquerda
+void moverRainha(int passos) {
+    if (passos == 0) return;
+    printf("Rainha moveu para Esquerda.\n");
+    moverRainha(passos - 1);
+}
 
-    printf("\n");
+//Movimentar o Bispo diagonal (cima e direita) com loops aninhados
+void moverBispo(int vertical) {
+    if (vertical == 0) return;
 
-    for (int m = 0; m < 3; m++) { // m: número de movimentos em L
-        for (int i = 0; i < 2; i++) {
-            printf("Cavalo moveu para cima.\n");
-        }
+    for (int i = 0; i < 1; i++) {
         for (int j = 0; j < 1; j++) {
-            printf("Cavalo moveu para direita.\n");
+            printf("Bispo moveu para cima, direita\n");
         }
-        
+    }
+
+    moverBispo(vertical - 1);
+}
+
+// Movimentar o Cavalo em "L"
+void moverCavalo() {
+    int i = 0, j = 0;
+
+    while (1) {
+        if (i < 2) {
+            printf("Cavalo moveu para cima.\n");
+            i++;
+            continue;
+        }
+        if (j < 1) {
+            printf("Cavalo moveu para direita.\n");
+            j++;
+            break;
+        }
+    }
+}
+
+int main() {
+    printf("Movimento da Torre:\n");
+    moverTorre(5); // 5 casas para a direita
+
+    printf("\nMovimento da Rainha:\n");
+    moverRainha(8); // 8 casas para a esquerda
+
+    printf("\nMovimento do Bispo:\n");
+    moverBispo(5); // 5 casas em diagonal
+
+    printf("\nMovimento do Cavalo:\n");
+    moverCavalo(); // movimento em "L"
 
     return 0;
 }
-
-
-}
-
